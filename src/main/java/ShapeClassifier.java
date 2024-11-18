@@ -146,7 +146,7 @@ public class ShapeClassifier {
 	}
 
 	// Suggest what this shape is
-	private String makeSuggestion(Integer[] parameters, String shapeGuess, String guessResult) throws Exception {
+	protected String makeSuggestion(Integer[] parameters, String shapeGuess, String guessResult) throws Exception {
 		if (parameters.length == 1) {
 			return "Suggestion=Line";
 		}
@@ -187,17 +187,17 @@ public class ShapeClassifier {
 	}
 
 	// P = 2 * PI *r
-	private int calculateCirclePerimeter(int r) {
+	protected int calculateCirclePerimeter(int r) {
 		return (int) (2 * Math.PI * r);
 	}
 
 	// P = 4 * s
-	private int calculateSquarePerimeter(int side) {
+	protected int calculateSquarePerimeter(int side) {
 		return 4 * side;
 	}
 
 	// P = 2l + 2w)
-	private int calculateRectanglePerimeter(int side1, int side2, int side3, int side4) {
+	protected int calculateRectanglePerimeter(int side1, int side2, int side3, int side4) {
 		if (side1 == side2) {
 
 			return (2 * side1) + (2 * side3);
@@ -211,19 +211,19 @@ public class ShapeClassifier {
 	}
 
 	// P = a + b + c
-	private int calculateTrianglePerimeter(int side1, int side2 , int side3) {
+	protected int calculateTrianglePerimeter(int side1, int side2 , int side3) {
 		return side1 + side2 + side3;
 	}
 
 	// This is an approximation
 	// PI(3(a+b) - sqrt((3a+b)(a+3b))
-	private int calculateEllipsePerimeter(int a, int b) {
+	protected int calculateEllipsePerimeter(int a, int b) {
 		double da = a, db = b;
 		return (int) ((int) Math.PI * (3 * (da+db) - Math.sqrt((3*da+db)*(da+3*db)))); 
 	}
 
 	// Transform a string argument into an array of numbers
-	private Integer[] getParams(String args) {
+	protected Integer[] getParams(String args) {
 		Integer[] numParams = null;
 		try {
 			String[] params = args.split(",");
@@ -245,7 +245,7 @@ public class ShapeClassifier {
 	}
 
 	// extract the Even/Odd guess
-	private String getEvenOddGuess(String args)   {
+	protected String getEvenOddGuess(String args)   {
 		try {
 			String[] params = args.split(",");
 			return params[2];
@@ -254,7 +254,7 @@ public class ShapeClassifier {
 	}
 
 	// extract the size guess
-	private String getSizeGuess(String args) {
+	protected String getSizeGuess(String args) {
 		try {
 			String[] params = args.split(",");
 			return params[1];		
@@ -263,7 +263,7 @@ public class ShapeClassifier {
 	}
 
 	// extract the shape guess 
-	private String getShapeGuess(String args)  {
+	protected String getShapeGuess(String args)  {
 		try {
 			String[] params = args.split(",");
 			return params[0];
@@ -272,7 +272,7 @@ public class ShapeClassifier {
 	}
 
 	// classify an two sides 
-	private String classify2Parameters(int a, int b)  {
+	protected String classify2Parameters(int a, int b)  {
 		if (a == b) {
 			return twoParamGuesses[0];
 		} else 
@@ -280,7 +280,7 @@ public class ShapeClassifier {
 	}
 
 	// Classify four sides 
-	private String classify4Parameters(int a, int b, int c, int d) {
+	protected String classify4Parameters(int a, int b, int c, int d) {
 		if (a == b && c == d && a == c) {
 			return fourParamGuesses[1]; // square
 		}
@@ -288,7 +288,7 @@ public class ShapeClassifier {
 	}
 
 	// Classify a triangle based on the length of its sides
-	private String classify3Parameters(int a, int b, int c) {
+	protected String classify3Parameters(int a, int b, int c) {
 
 		if ( (a < (b+c)) && (b < (a + c)) && (c < (a+b)) ) {
 			if (a == b && b == c) {
